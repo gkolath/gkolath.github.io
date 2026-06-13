@@ -3,329 +3,818 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>George Kolath — QE Practice Lead & Test Architect</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>George David Kolath — AI-Native QE Leader & Platform Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #0B1628;
+      --navy-mid:  #111f38;
+      --navy-card: #152035;
+      --teal:      #00C2B5;
+      --teal-dim:  rgba(0,194,181,0.10);
+      --teal-glow: rgba(0,194,181,0.22);
+      --amber:     #F5A623;
+      --white:     #E8EDF5;
+      --slate:     #8A9AB5;
+      --slate-dim: rgba(138,154,181,0.12);
+      --border:    rgba(138,154,181,0.18);
+      --radius:    12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 64px;
+      background: rgba(11,22,40,0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 1rem; letter-spacing: 0.02em;
+    }
+    .nav-logo span { color: var(--teal); }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a {
+      color: var(--slate); text-decoration: none;
+      font-size: 0.855rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--teal); }
+    .nav-cta {
+      padding: 0.4rem 1rem;
+      border: 1.5px solid var(--teal); border-radius: 6px;
+      color: var(--teal) !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--teal-dim) !important; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--white); font-size: 1.4rem; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+    #hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(0,194,181,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem; align-items: center;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+    }
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem; color: var(--teal);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.025em;
+      margin-bottom: 1.4rem;
+    }
+    h1 .hl { color: var(--teal); }
+    .hero-sub {
+      font-size: 1.02rem; color: var(--slate);
+      max-width: 520px; line-height: 1.8; margin-bottom: 2.25rem;
+    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.25rem; }
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; padding: 0.3rem 0.75rem;
+      border: 1px solid var(--border); border-radius: 4px; color: var(--slate);
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 0.8rem 1.75rem; background: var(--teal); color: var(--navy);
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.875rem;
+      border: none; border-radius: 8px; cursor: pointer; text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s; display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-ghost {
+      padding: 0.8rem 1.75rem; background: transparent; color: var(--white);
+      font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 0.875rem;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      cursor: pointer; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s; display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ── RRS RING ── */
+    .rrs-panel {
+      background: var(--navy-card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2.25rem 2rem;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .rrs-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem; color: var(--teal);
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .rrs-ring-wrap { position: relative; width: 190px; height: 190px; }
+    .rrs-ring-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .rrs-track { fill: none; stroke: var(--slate-dim); stroke-width: 11; }
+    .rrs-fill {
+      fill: none; stroke: var(--amber); stroke-width: 11; stroke-linecap: round;
+      stroke-dasharray: 534; stroke-dashoffset: 534;
+      transition: stroke-dashoffset 2s cubic-bezier(0.4,0,0.2,1);
+      filter: drop-shadow(0 0 7px rgba(245,166,35,0.45));
+    }
+    .rrs-center {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .rrs-score {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem; font-weight: 700; color: var(--amber); line-height: 1;
+    }
+    .rrs-score-lbl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem; color: var(--slate); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-top: 0.3rem;
+    }
+    .rrs-bars { margin-top: 1.4rem; width: 100%; display: flex; flex-direction: column; gap: 0.55rem; }
+    .rrs-bar-row { display: flex; align-items: center; gap: 0.7rem; }
+    .rrs-bar-name { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--slate); width: 70px; flex-shrink: 0; }
+    .rrs-bar-track { flex: 1; height: 3px; background: var(--slate-dim); border-radius: 2px; overflow: hidden; }
+    .rrs-bar-fill { height: 100%; background: var(--teal); border-radius: 2px; width: 0; transition: width 2s cubic-bezier(0.4,0,0.2,1); }
+    .rrs-bar-val { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--white); width: 24px; text-align: right; }
+    .rrs-footnote { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: var(--slate); margin-top: 1.2rem; text-align: center; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 1.75rem 5%;
+    }
+    .stats-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1.25rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-num { font-family: 'Space Grotesk', sans-serif; font-size: 1.9rem; font-weight: 700; color: var(--teal); line-height: 1; }
+    .stat-desc { font-size: 0.76rem; color: var(--slate); margin-top: 0.25rem; }
+
+    /* ── SECTIONS (shared) ── */
+    section { padding: 5rem 5%; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem; color: var(--teal);
+      letter-spacing: 0.13em; text-transform: uppercase; margin-bottom: 0.65rem;
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.9rem;
+    }
+    .section-lead { font-size: 1rem; color: var(--slate); max-width: 580px; line-height: 1.8; margin-bottom: 3rem; }
+    .divider { width: 44px; height: 3px; background: var(--teal); border-radius: 2px; margin-bottom: 1.75rem; }
+    .alt-bg { background: var(--navy-mid); }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .about-body { font-size: 0.97rem; color: var(--slate); line-height: 1.85; }
+    .about-body p { margin-bottom: 1.2rem; }
+    .about-body strong { color: var(--white); }
+    .about-right { display: flex; flex-direction: column; gap: 0.85rem; }
+    .exp-pill {
+      background: var(--navy-card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.9rem 1.1rem;
+      display: flex; align-items: center; gap: 0.9rem;
+    }
+    .exp-pill.current { border-color: var(--teal); background: var(--teal-dim); }
+    .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .dot-teal { background: var(--teal); }
+    .dot-slate { background: var(--slate); }
+    .dot-amber { background: var(--amber); }
+    .pill-co { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.875rem; }
+    .pill-role { font-size: 0.775rem; color: var(--slate); margin-top: 0.1rem; }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
+      width: 2px; background: linear-gradient(to bottom, var(--teal), var(--navy-mid));
+      border-radius: 2px;
+    }
+    .tl-item { position: relative; margin-bottom: 2.75rem; }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -2.4rem; top: 4px;
+      width: 12px; height: 12px; border-radius: 50%;
+      border: 2px solid var(--teal); background: var(--navy);
+    }
+    .tl-item:first-child .tl-dot { background: var(--teal); }
+    .tl-meta {
+      display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center;
+      margin-bottom: 0.4rem;
+    }
+    .tl-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem; color: var(--teal); letter-spacing: 0.06em;
+    }
+    .tl-company {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem; font-weight: 600; color: var(--slate);
+    }
+    .tl-role {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem; font-weight: 700; margin-bottom: 0.65rem;
+    }
+    .tl-item ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .tl-item ul li {
+      font-size: 0.875rem; color: var(--slate); line-height: 1.65;
+      padding-left: 1.1rem; position: relative;
+    }
+    .tl-item ul li::before {
+      content: '›'; position: absolute; left: 0; color: var(--teal); font-weight: 700;
+    }
+
+    /* ── IP CARDS ── */
+    .ip-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.35rem; }
+    .ip-card {
+      background: var(--navy-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.65rem;
+      position: relative; overflow: hidden;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .ip-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--teal); transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .ip-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+    .ip-card:hover::before { transform: scaleX(1); }
+    .ip-badge {
+      display: inline-block; font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem; padding: 0.22rem 0.6rem; border-radius: 4px;
+      margin-bottom: 0.9rem; letter-spacing: 0.06em;
+    }
+    .badge-platform { background: rgba(0,194,181,0.12); color: var(--teal); }
+    .badge-metric   { background: rgba(245,166,35,0.12); color: var(--amber); }
+    .badge-agent    { background: rgba(138,154,181,0.12); color: var(--slate); }
+    .badge-intel    { background: rgba(0,194,181,0.08); color: var(--teal); }
+    .ip-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.55rem; }
+    .ip-card p { font-size: 0.855rem; color: var(--slate); line-height: 1.7; }
+    .ip-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.1rem; }
+    .ip-tag { font-size: 0.68rem; padding: 0.18rem 0.5rem; border: 1px solid var(--border); border-radius: 4px; color: var(--slate); }
+
+    /* ── THOUGHT LEADERSHIP ── */
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; }
+    .content-card {
+      background: var(--navy-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
+      transition: border-color 0.2s;
+    }
+    .content-card:hover { border-color: var(--teal); }
+    .content-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; color: var(--teal); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 0.7rem;
+    }
+    .content-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.08rem; font-weight: 700; margin-bottom: 0.7rem; line-height: 1.3; }
+    .content-card p { font-size: 0.855rem; color: var(--slate); line-height: 1.72; }
+    .content-card a {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 1.2rem; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.84rem; font-weight: 600; color: var(--teal); text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .content-card a:hover { gap: 0.7rem; }
+    .articles-list { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.4rem; }
+    .article-item {
+      padding: 0.85rem; background: rgba(138,154,181,0.05);
+      border-radius: 8px; border: 1px solid var(--border);
+    }
+    .article-item h4 { font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .article-item p { font-size: 0.78rem; color: var(--slate); }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; }
+    .skill-group {
+      background: var(--navy-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.4rem;
+    }
+    .skill-group h3 { font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.85rem; color: var(--white); }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .skill-tag {
+      font-size: 0.72rem; padding: 0.28rem 0.65rem;
+      background: var(--slate-dim); border: 1px solid var(--border);
+      border-radius: 5px; color: var(--slate);
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: linear-gradient(135deg, var(--navy) 0%, #0d1e36 100%); }
+    .contact-wrap { max-width: 600px; margin: 0 auto; text-align: center; }
+    .contact-wrap h2 { margin-bottom: 1rem; }
+    .contact-wrap p { color: var(--slate); font-size: 1rem; line-height: 1.8; margin-bottom: 2.25rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.4rem; border: 1.5px solid var(--border); border-radius: 8px;
+      color: var(--white); text-decoration: none;
+      font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem; font-weight: 500;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-link:hover { border-color: var(--teal); color: var(--teal); }
+    .contact-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem 5%; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.76rem; color: var(--slate); }
+    footer span { color: var(--teal); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .rrs-panel { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .content-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .stats-inner { justify-content: center; gap: 2rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rrs-fill, .rrs-bar-fill { transition: none; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <div class="nav__logo">GK</div>
-    <ul class="nav__links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="nav__toggle" aria-label="Toggle menu">&#9776;</button>
-  </nav>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">George David <span>Kolath</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#ip">IP Portfolio</a></li>
+    <li><a href="#thought-leadership">Writing</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact" class="nav-cta">Connect</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+</nav>
 
-  <!-- HERO -->
-  <header class="hero" id="about">
-    <div class="hero__content">
-      <p class="hero__tag">Quality Engineering Leader</p>
-      <h1 class="hero__name">George David Kolath</h1>
-      <p class="hero__title">QE Practice Lead &amp; Test Architecture Specialist</p>
-      <p class="hero__bio">
-        17+ years shaping quality engineering across retail, aviation, fintech, and enterprise software.
-        I build QE practices from the ground up — blending automation strategy, AI-driven tooling,
-        and team development to deliver measurable improvements in release quality and velocity.
-      </p>
-      <div class="hero__cta">
-        <a href="#projects" class="btn btn--primary">View Projects</a>
-        <a href="#contact" class="btn btn--outline">Get in Touch</a>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div>
+      <p class="hero-eyebrow">QE Practice Head · AI-Native Quality Engineering · Platform Builder</p>
+      <h1>Building the Future<br/>of <span class="hl">Quality Engineering</span><br/>One Release at a Time.</h1>
+      <p class="hero-sub">18 years turning quality engineering from a cost centre into revenue infrastructure. Leading an AI-native QE Centre of Excellence — and building <strong style="color:var(--white)">QEVantage™</strong>, a proprietary operating system for intelligent release confidence.</p>
+      <div class="hero-tags">
+        <span class="tag">Retail</span><span class="tag">Aviation</span><span class="tag">Fintech</span>
+        <span class="tag">Enterprise SaaS</span><span class="tag">GenAI</span>
+        <span class="tag">Playwright</span><span class="tag">Kochi · India</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#ip" class="btn-primary">Explore My IP</a>
+        <a href="#contact" class="btn-ghost">Let's Talk</a>
       </div>
     </div>
-    <div class="hero__stats">
-      <div class="stat">
-        <span class="stat__num">17+</span>
-        <span class="stat__label">Years Experience</span>
+
+    <div class="rrs-panel">
+      <p class="rrs-label">Release Readiness Score™ · Live</p>
+      <div class="rrs-ring-wrap">
+        <svg viewBox="0 0 190 190" xmlns="http://www.w3.org/2000/svg">
+          <circle class="rrs-track" cx="95" cy="95" r="85"/>
+          <circle class="rrs-fill" id="rrsArc" cx="95" cy="95" r="85"/>
+        </svg>
+        <div class="rrs-center">
+          <div class="rrs-score" id="rrsNum">0</div>
+          <div class="rrs-score-lbl">RRS™ Score</div>
+        </div>
       </div>
-      <div class="stat">
-        <span class="stat__num">30+</span>
-        <span class="stat__label">Engineers Led</span>
+      <div class="rrs-bars">
+        <div class="rrs-bar-row">
+          <span class="rrs-bar-name">Functional</span>
+          <div class="rrs-bar-track"><div class="rrs-bar-fill" data-w="92"></div></div>
+          <span class="rrs-bar-val">92</span>
+        </div>
+        <div class="rrs-bar-row">
+          <span class="rrs-bar-name">Performance</span>
+          <div class="rrs-bar-track"><div class="rrs-bar-fill" data-w="85"></div></div>
+          <span class="rrs-bar-val">85</span>
+        </div>
+        <div class="rrs-bar-row">
+          <span class="rrs-bar-name">Security</span>
+          <div class="rrs-bar-track"><div class="rrs-bar-fill" data-w="78"></div></div>
+          <span class="rrs-bar-val">78</span>
+        </div>
+        <div class="rrs-bar-row">
+          <span class="rrs-bar-name">Coverage</span>
+          <div class="rrs-bar-track"><div class="rrs-bar-fill" data-w="88"></div></div>
+          <span class="rrs-bar-val">88</span>
+        </div>
       </div>
-      <div class="stat">
-        <span class="stat__num">50%</span>
-        <span class="stat__label">Regression Time Saved</span>
+      <p class="rrs-footnote">Powered by QEVantage™ · Independent IP</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="stat-num">18+</div><div class="stat-desc">Years in Quality Engineering</div></div>
+    <div class="stat-item"><div class="stat-num">30+</div><div class="stat-desc">Engineers Led</div></div>
+    <div class="stat-item"><div class="stat-num">50%</div><div class="stat-desc">Regression Time Saved</div></div>
+    <div class="stat-item"><div class="stat-num">85%</div><div class="stat-desc">Automation Coverage Achieved</div></div>
+    <div class="stat-item"><div class="stat-num">&lt;3min</div><div class="stat-desc">PR Agent Cycle Time</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="eyebrow">About</p>
+    <div class="divider"></div>
+    <div class="about-grid">
+      <div>
+        <h2>QE Leader.<br/>Platform Builder.<br/>Practitioner.</h2>
+        <div class="about-body">
+          <p>I started as a Mechanical Engineer and taught myself quality engineering — which means I've never taken the discipline for granted. That practitioner's instinct has shaped everything: the frameworks, the tooling, the way I run teams.</p>
+          <p>Today I lead an <strong>AI-native QE Centre of Excellence</strong> at Litmus7 Systems Consulting, with P&L ownership and enterprise clients across retail, aviation, and fintech. We don't just test software — we protect revenue.</p>
+          <p>Alongside that I'm building <strong>QEVantage™</strong> — an independent platform that unifies functional, automation, performance, and security testing under a single intelligence layer, culminating in a Release Readiness Score™ that gives engineering leaders a defensible go/no-go signal before every deployment.</p>
+          <p>I write, build, and ship in public. If you're rethinking what quality engineering means in an AI-native world — let's talk.</p>
+        </div>
       </div>
-      <div class="stat">
-        <span class="stat__num">85%</span>
-        <span class="stat__label">Automation Coverage</span>
+      <div class="about-right">
+        <div class="exp-pill current">
+          <div class="dot dot-teal"></div>
+          <div><div class="pill-co">Litmus7 Systems Consulting</div><div class="pill-role">QE Practice Head · AI-Native CoE · Current</div></div>
+        </div>
+        <div class="exp-pill">
+          <div class="dot dot-slate"></div>
+          <div><div class="pill-co">IBS Software</div><div class="pill-role">Senior Test Architect / Test Manager</div></div>
+        </div>
+        <div class="exp-pill">
+          <div class="dot dot-slate"></div>
+          <div><div class="pill-co">EQS Web Technologies</div><div class="pill-role">QA Lead</div></div>
+        </div>
+        <div class="exp-pill">
+          <div class="dot dot-slate"></div>
+          <div><div class="pill-co">Hubbell India</div><div class="pill-role">QA Lead</div></div>
+        </div>
+        <div class="exp-pill">
+          <div class="dot dot-slate"></div>
+          <div><div class="pill-co">Emirates Group IT · UST Global · Tesco</div><div class="pill-role">Senior QE Engineering Roles</div></div>
+        </div>
+        <div class="exp-pill" style="border-color:var(--amber); background: rgba(245,166,35,0.07);">
+          <div class="dot dot-amber"></div>
+          <div><div class="pill-co">QEVantage™</div><div class="pill-role">Founder · Independent IP Platform</div></div>
+        </div>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- EXPERIENCE -->
-  <section class="section" id="experience">
-    <div class="container">
-      <h2 class="section__title">Experience</h2>
-      <div class="timeline">
+<!-- EXPERIENCE TIMELINE -->
+<section id="experience" class="alt-bg">
+  <div class="section-inner">
+    <p class="eyebrow">Career</p>
+    <div class="divider"></div>
+    <h2>Experience</h2>
+    <p class="section-lead">18 years across retail, aviation, fintech, and enterprise SaaS — building practices, not just passing tests.</p>
+    <div class="timeline">
 
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__body">
-            <div class="timeline__meta">
-              <span class="timeline__date">Oct 2025 – Present</span>
-              <span class="timeline__company">Litmus7 Systems Consulting</span>
-            </div>
-            <h3 class="timeline__role">QE Practice Lead</h3>
-            <ul>
-              <li>Led QE practice for enterprise retail programs across 10+ products, standardising frameworks enabling shift-left quality.</li>
-              <li>Improved release quality by 30–40% (defect leakage) and cut regression cycles by 50% through automation.</li>
-              <li>Built and mentored teams of 15–30 engineers, growing automation coverage from ~40% to 75–85%.</li>
-              <li>Drove QE contributions to 20+ RFPs, helping win and expand multi-million-dollar accounts.</li>
-              <li>Established data-driven quality dashboards, reducing test flakiness by 30–40%.</li>
-            </ul>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-date">Oct 2025 – Present</span>
+          <span class="tl-company">Litmus7 Systems Consulting</span>
+        </div>
+        <div class="tl-role">QE Practice Head</div>
+        <ul>
+          <li>Led QE practice across 10+ enterprise retail products, standardising frameworks enabling shift-left quality.</li>
+          <li>Improved release quality by 30–40% (defect leakage) and cut regression cycles by 50% through automation.</li>
+          <li>Built and mentored teams of 15–30 engineers, growing automation coverage from ~40% to 75–85%.</li>
+          <li>Drove QE contributions to 20+ RFPs, helping win and expand multi-million-dollar accounts.</li>
+          <li>Established data-driven quality dashboards reducing test flakiness by 30–40%.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-date">Oct 2024 – Sep 2025</span>
+          <span class="tl-company">IBS Software</span>
+        </div>
+        <div class="tl-role">Senior Test Architect / Test Manager</div>
+        <ul>
+          <li>Led 12+ member cross-functional teams across 5 aviation projects, achieving 98% compliance with AS9100/FAA/EASA standards.</li>
+          <li>Automated frameworks for aircraft servicing and MRO testing, cutting cycle times by 40% and improving defect detection by 25%.</li>
+          <li>Mentored 20+ QA engineers, delivering 30% productivity uplift with zero major audit findings.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-date">Aug 2020 – Oct 2024</span>
+          <span class="tl-company">EQS Web Technologies</span>
+        </div>
+        <div class="tl-role">QA Lead</div>
+        <ul>
+          <li>Reduced software defects by 25% and testing time by 25% through new QA process frameworks.</li>
+          <li>Led team of 10 testers to 100% on-time delivery and 98% test coverage.</li>
+          <li>Implemented Cypress, WebDriverIO, and K6 for modern web and performance automation.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-date">Sep 2017 – Aug 2020</span>
+          <span class="tl-company">Hubbell India</span>
+        </div>
+        <div class="tl-role">QA Lead</div>
+        <ul>
+          <li>Achieved 95% customer satisfaction through exceptional service delivery and issue resolution.</li>
+          <li>Streamlined cross-functional processes, reducing project completion time by 15%.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-date">2016</span>
+          <span class="tl-company">Emirates Group IT, Dubai</span>
+        </div>
+        <div class="tl-role">QA Senior Tester</div>
+        <ul>
+          <li>Implemented automation testing reducing testing time by 50% and increasing efficiency by 75%.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-date">Oct 2013 – Mar 2016</span>
+          <span class="tl-company">UST Global</span>
+        </div>
+        <div class="tl-role">Senior Tester</div>
+        <ul>
+          <li>Delivered 25% efficiency gains and $50K/year cost savings through improved testing processes.</li>
+          <li>Maintained 95% defect detection rate consistently across engagements.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-meta">
+          <span class="tl-date">Jul 2008 – Sep 2013</span>
+          <span class="tl-company">Tesco Technology</span>
+        </div>
+        <div class="tl-role">Software Engineer (QA)</div>
+        <ul>
+          <li>Developed and executed 500+ automated/manual tests using Playwright and Appium across 10+ web projects.</li>
+          <li>Managed test plans for 15+ projects with 100% on-time delivery and 92% requirements coverage.</li>
+          <li>Cut integration errors by 45% through API validation and data flow optimisation.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- IP PORTFOLIO -->
+<section id="ip">
+  <div class="section-inner">
+    <p class="eyebrow">IP Portfolio</p>
+    <div class="divider"></div>
+    <h2>Proprietary Frameworks<br/>& Platforms</h2>
+    <p class="section-lead">Production-tested IP developed independently. Built through practice, not theory.</p>
+    <div class="ip-grid">
+
+      <div class="ip-card">
+        <span class="ip-badge badge-platform">Platform</span>
+        <h3>QEVantage™</h3>
+        <p>An AI-native QE operating system unifying functional, automation, performance, and security testing under a single intelligence layer. Built for engineering leaders who need release confidence — not just coverage metrics.</p>
+        <div class="ip-tags"><span class="ip-tag">AI-Native</span><span class="ip-tag">Platform</span><span class="ip-tag">Multi-Layer QE</span></div>
+      </div>
+
+      <div class="ip-card">
+        <span class="ip-badge badge-metric">Metric</span>
+        <h3>Release Readiness Score™</h3>
+        <p>A composite, weighted confidence signal aggregating functional, performance, security, and coverage telemetry into a single defensible go/no-go score. Validated via a working Python engine against historical deployment data.</p>
+        <div class="ip-tags"><span class="ip-tag">Scoring Engine</span><span class="ip-tag">Python</span><span class="ip-tag">Decision Signal</span></div>
+      </div>
+
+      <div class="ip-card">
+        <span class="ip-badge badge-agent">Agent</span>
+        <h3>PR Agent</h3>
+        <p>GitHub webhook-triggered, Claude API-powered intelligent test selection. Analyses PR diffs, maps changes to risk areas, and runs targeted Playwright regression — full cycle under 3 minutes.</p>
+        <div class="ip-tags"><span class="ip-tag">Claude API</span><span class="ip-tag">Playwright</span><span class="ip-tag">&lt;3 min cycle</span></div>
+      </div>
+
+      <div class="ip-card">
+        <span class="ip-badge badge-intel">Intelligence</span>
+        <h3>DefectIQ™</h3>
+        <p>An AI-powered defect intelligence layer that classifies, patterns, and predicts defect clusters across releases — moving QE from reactive bug-finding to proactive quality forecasting.</p>
+        <div class="ip-tags"><span class="ip-tag">AI Classification</span><span class="ip-tag">Defect Patterns</span><span class="ip-tag">Forecasting</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THOUGHT LEADERSHIP -->
+<section id="thought-leadership" class="alt-bg">
+  <div class="section-inner">
+    <p class="eyebrow">Thought Leadership</p>
+    <div class="divider"></div>
+    <h2>Writing & Research</h2>
+    <p class="section-lead">Practitioner-voice content on AI-native quality engineering — for QE leaders, engineering heads, and founders rethinking how quality scales.</p>
+    <div class="content-grid">
+
+      <div class="content-card">
+        <p class="content-type">White Paper · Published</p>
+        <h3>Testing the AI Tester</h3>
+        <p>A practitioner's framework for evaluating, governing, and deploying AI agents in QE workflows. Covers autonomy levels, trust calibration, hallucination risk in test generation, and what "done" looks like when your tester is a model.</p>
+        <a href="https://www.linkedin.com/in/george-david-kolath/" target="_blank" rel="noopener">Read on LinkedIn →</a>
+      </div>
+
+      <div class="content-card">
+        <p class="content-type">Article Series · LinkedIn</p>
+        <h3>Building the AI-Native QE Practice</h3>
+        <div class="articles-list">
+          <div class="article-item">
+            <h4>Article 1 — The PR Agent</h4>
+            <p>How a GitHub webhook + Claude API replaced a 45-minute regression cycle with a 3-minute intelligent loop.</p>
+          </div>
+          <div class="article-item">
+            <h4>Article 2 — Story-to-Playwright</h4>
+            <p>Turning user stories into production-ready Playwright tests — without a single line written by hand.</p>
           </div>
         </div>
+        <a href="https://www.linkedin.com/in/george-david-kolath/" target="_blank" rel="noopener">Follow the series →</a>
+      </div>
 
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__body">
-            <div class="timeline__meta">
-              <span class="timeline__date">Oct 2024 – Sep 2025</span>
-              <span class="timeline__company">IBS Software</span>
-            </div>
-            <h3 class="timeline__role">Senior Test Architect / Test Manager</h3>
-            <ul>
-              <li>Led 12+ member cross-functional teams across 5 aviation projects, achieving 98% compliance with AS9100/FAA/EASA standards.</li>
-              <li>Automated frameworks for aircraft servicing and MRO testing, cutting cycle times by 40% and improving defect detection by 25%.</li>
-              <li>Mentored 20+ QA engineers, delivering a 30% productivity uplift with zero major audit findings.</li>
-            </ul>
-          </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="eyebrow">Skills & Tools</p>
+    <div class="divider"></div>
+    <h2>Technical Stack</h2>
+    <p class="section-lead">Tools chosen in practice, not on a resume.</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Test Automation</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Playwright</span><span class="skill-tag">Cypress</span>
+          <span class="skill-tag">WebDriverIO</span><span class="skill-tag">Appium</span><span class="skill-tag">Selenium</span>
         </div>
-
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__body">
-            <div class="timeline__meta">
-              <span class="timeline__date">Aug 2020 – Oct 2024</span>
-              <span class="timeline__company">EQS Web Technologies</span>
-            </div>
-            <h3 class="timeline__role">QA Lead</h3>
-            <ul>
-              <li>Reduced software defects by 25% and testing time by 25% through new QA process frameworks.</li>
-              <li>Led team of 10 testers to 100% on-time delivery and 98% test coverage.</li>
-              <li>Implemented Cypress, WebDriverIO, and K6 for modern web and performance automation.</li>
-            </ul>
-          </div>
+      </div>
+      <div class="skill-group">
+        <h3>Performance & Security</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">K6</span><span class="skill-tag">JMeter</span><span class="skill-tag">OWASP ZAP</span>
         </div>
-
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__body">
-            <div class="timeline__meta">
-              <span class="timeline__date">Sep 2017 – Aug 2020</span>
-              <span class="timeline__company">Hubbell India</span>
-            </div>
-            <h3 class="timeline__role">QA Lead</h3>
-            <ul>
-              <li>Achieved 95% customer satisfaction through exceptional service delivery and issue resolution.</li>
-              <li>Streamlined cross-functional processes, reducing project completion time by 15%.</li>
-            </ul>
-          </div>
+      </div>
+      <div class="skill-group">
+        <h3>AI & Tooling</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Claude API</span><span class="skill-tag">GenAI QE</span>
+          <span class="skill-tag">GitHub Webhooks</span><span class="skill-tag">Cursor AI</span>
         </div>
-
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__body">
-            <div class="timeline__meta">
-              <span class="timeline__date">2016</span>
-              <span class="timeline__company">Emirates IT Group, Dubai</span>
-            </div>
-            <h3 class="timeline__role">QA Senior Tester</h3>
-            <ul>
-              <li>Implemented automation testing reducing testing time by 50% and increasing efficiency by 75%.</li>
-            </ul>
-          </div>
+      </div>
+      <div class="skill-group">
+        <h3>Leadership</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Practice Management</span><span class="skill-tag">P&L Ownership</span>
+          <span class="skill-tag">Team Mentoring</span><span class="skill-tag">RFP Strategy</span>
         </div>
-
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__body">
-            <div class="timeline__meta">
-              <span class="timeline__date">Oct 2013 – Mar 2016</span>
-              <span class="timeline__company">UST Global</span>
-            </div>
-            <h3 class="timeline__role">Senior Tester</h3>
-            <ul>
-              <li>Delivered 25% efficiency gains and $50K/year cost savings through improved testing processes.</li>
-              <li>Maintained 95% defect detection rate consistently across engagements.</li>
-            </ul>
-          </div>
+      </div>
+      <div class="skill-group">
+        <h3>Methodologies</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Shift-Left Testing</span><span class="skill-tag">BDD</span>
+          <span class="skill-tag">Agile / Scrum</span><span class="skill-tag">CI/CD</span>
         </div>
-
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__body">
-            <div class="timeline__meta">
-              <span class="timeline__date">Jul 2008 – Sep 2013</span>
-              <span class="timeline__company">TESCO</span>
-            </div>
-            <h3 class="timeline__role">Software Engineer (QA)</h3>
-            <ul>
-              <li>Developed and executed 500+ automated/manual tests using Playwright and Appium across 10+ web projects.</li>
-              <li>Managed test plans for 15+ projects with 100% on-time delivery and 92% requirements coverage.</li>
-              <li>Cut integration errors by 45% through API validation and data flow optimisation.</li>
-            </ul>
-          </div>
+      </div>
+      <div class="skill-group">
+        <h3>Domains & Certs</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Retail</span><span class="skill-tag">Aviation / MRO</span>
+          <span class="skill-tag">Fintech</span><span class="skill-tag">Certified Scrum Master</span>
         </div>
-
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PROJECTS -->
-  <section class="section section--alt" id="projects">
-    <div class="container">
-      <h2 class="section__title">Projects &amp; Initiatives</h2>
-      <div class="cards">
-
-        <div class="card card--featured">
-          <div class="card__badge">Founder</div>
-          <h3 class="card__title">QEVantage™</h3>
-          <p class="card__sub">AI-Native Quality Engineering Platform</p>
-          <p class="card__desc">
-            An intelligent QE platform unifying functional, automation, performance, and security testing
-            under a single AI intelligence layer. Delivers a real-time <strong>Release Readiness Score™</strong>
-            — replacing gut-feel release decisions with evidence-backed go/no-go signals.
-          </p>
-          <ul class="card__tags">
-            <li>AI/ML</li><li>Test Orchestration</li><li>Self-Healing Tests</li><li>CI/CD</li><li>Security Testing</li>
-          </ul>
-          <div class="card__metrics">
-            <span>40% reduction in QE effort</span>
-            <span>3× faster release cycles</span>
-            <span>5 testing disciplines unified</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card__badge">Whitepaper</div>
-          <h3 class="card__title">Testing the AI Tester</h3>
-          <p class="card__sub">Published Research</p>
-          <p class="card__desc">
-            An in-depth whitepaper exploring how AI-generated and AI-assisted testing tools
-            perform under real-world conditions — where they excel, where they fall short,
-            and what QE professionals need to know to stay ahead.
-          </p>
-          <ul class="card__tags">
-            <li>AI Testing</li><li>Research</li><li>Quality Engineering</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="card__badge">Practice</div>
-          <h3 class="card__title">Enterprise QE Practice Build</h3>
-          <p class="card__sub">Litmus7 Systems Consulting</p>
-          <p class="card__desc">
-            Built a QE practice from scratch supporting 10+ enterprise retail products.
-            Established reusable accelerators, reference architectures, and playbooks adopted
-            across 5–8 critical programs — delivering 15–20% reduction in QE onboarding time.
-          </p>
-          <ul class="card__tags">
-            <li>Retail</li><li>Automation</li><li>Team Building</li><li>RFPs</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="card__badge">Aviation</div>
-          <h3 class="card__title">MRO Quality Automation</h3>
-          <p class="card__sub">IBS Software</p>
-          <p class="card__desc">
-            Designed and implemented automated testing frameworks for aircraft servicing,
-            maintenance tracking, and configuration control across 200+ aircraft configurations —
-            achieving 98% compliance with FAA/EASA and AS9100 standards.
-          </p>
-          <ul class="card__tags">
-            <li>Aviation</li><li>Compliance</li><li>Automation</li><li>AS9100</li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section class="section" id="skills">
-    <div class="container">
-      <h2 class="section__title">Skills &amp; Tools</h2>
-      <div class="skills-grid">
-
-        <div class="skill-group">
-          <h3>Test Automation</h3>
-          <div class="skill-tags">
-            <span>Playwright</span><span>Cypress</span><span>WebDriverIO</span>
-            <span>Appium</span><span>Selenium</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <h3>Performance &amp; Security</h3>
-          <div class="skill-tags">
-            <span>K6</span><span>JMeter</span><span>ZAP</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <h3>Leadership</h3>
-          <div class="skill-tags">
-            <span>Practice Management</span><span>Team Mentoring</span>
-            <span>RFP Strategy</span><span>QE Roadmaps</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <h3>Methodologies</h3>
-          <div class="skill-tags">
-            <span>Shift-Left Testing</span><span>BDD</span><span>Agile / Scrum</span>
-            <span>CI/CD</span><span>AI-Augmented QE</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <h3>Domains</h3>
-          <div class="skill-tags">
-            <span>Retail</span><span>Aviation / MRO</span><span>Fintech</span>
-            <span>Enterprise SaaS</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <h3>Certifications</h3>
-          <div class="skill-tags">
-            <span>Certified Scrum Master</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="section section--alt" id="contact">
-    <div class="container contact">
-      <h2 class="section__title">Get in Touch</h2>
-      <p class="contact__sub">Open to leadership roles in QE, Test Architecture, and AI-driven quality initiatives.</p>
-      <div class="contact__links">
-        <a href="mailto:gkolath@live.com" class="contact__item">
-          <span class="contact__icon">✉</span>
-          <span>gkolath@live.com</span>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-wrap">
+      <p class="eyebrow" style="text-align:center">Connect</p>
+      <div class="divider" style="margin:0 auto 1.75rem"></div>
+      <h2>Let's Build Something<br/>Worth Shipping.</h2>
+      <p>Whether you're an enterprise leader evaluating QE strategy, an investor exploring AI-native QE platforms, or a hiring leader looking for someone who has actually built this — I'd like to hear from you.</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/george-david-kolath/" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
         </a>
-        <a href="https://www.linkedin.com/in/george-david-kolath/" target="_blank" rel="noopener" class="contact__item">
-          <span class="contact__icon">in</span>
-          <span>linkedin.com/in/george-david-kolath</span>
+        <a href="mailto:gkolath@live.com" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+          gkolath@live.com
+        </a>
+        <a href="https://github.com/gkolath" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
         </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="footer">
-    <p>&copy; 2026 George David Kolath. Built with HTML, CSS &amp; JavaScript.</p>
-  </footer>
+<footer>
+  <p>© 2026 George David Kolath · <span>QEVantage™ · RRS™ · DefectIQ™ · PR Agent</span> are independent IP assets.</p>
+  <p>Kochi, Kerala, India</p>
+</footer>
 
-  <script src="js/main.js"></script>
+<script>
+  // RRS ring animation
+  window.addEventListener('load', () => {
+    const target = 87;
+    const circ = 2 * Math.PI * 85; // r=85
+    const arc = document.getElementById('rrsArc');
+    const numEl = document.getElementById('rrsNum');
+    arc.style.strokeDasharray = circ;
+    arc.style.strokeDashoffset = circ;
+
+    setTimeout(() => {
+      const offset = circ - (target / 100) * circ;
+      arc.style.strokeDashoffset = offset;
+
+      let cur = 0;
+      const step = target / 60;
+      const t = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        numEl.textContent = Math.round(cur);
+        if (cur >= target) clearInterval(t);
+      }, 33);
+
+      document.querySelectorAll('.rrs-bar-fill').forEach(b => {
+        b.style.width = b.dataset.w + '%';
+      });
+    }, 500);
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a[href^="#"]');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => io.observe(s));
+
+  // Mobile nav toggle
+  document.getElementById('navToggle').addEventListener('click', () => {
+    const nl = document.getElementById('navLinks');
+    const open = nl.style.display === 'flex';
+    nl.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(11,22,40,0.97);padding:1.5rem 5%;gap:1rem;border-bottom:1px solid var(--border)';
+  });
+</script>
 </body>
 </html>
